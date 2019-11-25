@@ -10,11 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 2019_11_25_094249) do
+=======
 ActiveRecord::Schema.define(version: 2019_11_25_095612) do
+>>>>>>> master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
+=======
   create_table "bookings", force: :cascade do |t|
     t.datetime "start_datetime"
     t.datetime "end_datetime"
@@ -37,12 +43,25 @@ ActiveRecord::Schema.define(version: 2019_11_25_095612) do
     t.index ["booking_id"], name: "index_reviews_on_booking_id"
   end
 
+>>>>>>> master
   create_table "specialisations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
+  create_table "tutor_specialisations", force: :cascade do |t|
+    t.bigint "specialisation_id"
+    t.bigint "tutor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["specialisation_id"], name: "index_tutor_specialisations_on_specialisation_id"
+    t.index ["tutor_id"], name: "index_tutor_specialisations_on_tutor_id"
+  end
+
+=======
+>>>>>>> master
   create_table "tutors", force: :cascade do |t|
     t.integer "age"
     t.string "gender"
@@ -69,8 +88,13 @@ ActiveRecord::Schema.define(version: 2019_11_25_095612) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+<<<<<<< HEAD
+  add_foreign_key "tutor_specialisations", "specialisations"
+  add_foreign_key "tutor_specialisations", "tutors"
+=======
   add_foreign_key "bookings", "tutors"
   add_foreign_key "bookings", "users"
   add_foreign_key "reviews", "bookings"
+>>>>>>> master
   add_foreign_key "tutors", "users"
 end
