@@ -11,10 +11,10 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item active">
-          <%= link_to "View tutors", "#", class: "nav-link" %>
+          <%= link_to "View tutors", tutors_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Create a tutor profile", "#", class: "nav-link" %>
+          <%= link_to "Create a tutor profile", new_tutor_path, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
