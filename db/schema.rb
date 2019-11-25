@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_085931) do
+ActiveRecord::Schema.define(version: 2019_11_25_095612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
+    t.string "location"
+    t.text "comments"
+    t.bigint "user_id"
+    t.bigint "tutor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tutor_id"], name: "index_bookings_on_tutor_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "stars"
+    t.bigint "booking_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
+  end
 
   create_table "specialisations", force: :cascade do |t|
     t.string "name"
@@ -47,5 +69,8 @@ ActiveRecord::Schema.define(version: 2019_11_25_085931) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "tutors"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "reviews", "bookings"
   add_foreign_key "tutors", "users"
 end
