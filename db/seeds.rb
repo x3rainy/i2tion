@@ -5,3 +5,30 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts "seeding specialisations..."
+specialisations_array = [
+    'Mathematics',
+    'Algebra',
+    'Geometry',
+    'Science',
+    'Geography',
+    'History',
+    'English',
+    'Spanish',
+    'German',
+    'French',
+    'Latin',
+    'Greek',
+    'Arabic',
+    'Computer Science',
+    'Art',
+    'Economics',
+    'Music',
+    'Drama',
+    'Physical Education']
+specialisations_array.each do |spec|
+  a = Specialisation.new(name: spec)
+  a.save
+end
+
+puts "finished!"
