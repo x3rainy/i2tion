@@ -10,15 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_084930) do
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 2019_11_25_085931) do
+>>>>>>> master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "specialisations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+=======
+  create_table "tutors", force: :cascade do |t|
+    t.integer "age"
+    t.string "gender"
+    t.string "activity_status"
+    t.text "bio"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tutors_on_user_id"
+>>>>>>> master
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,8 +43,12 @@ ActiveRecord::Schema.define(version: 2019_11_25_084930) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.text "preference"
+    t.string "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tutors", "users"
 end
