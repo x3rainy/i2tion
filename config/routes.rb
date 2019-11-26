@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   resources :tutors do
     resources :bookings
   end
+
+  resources :bookings, only: [:show] do
+    resources :reviews, except: [:index]
+  end
+
 end

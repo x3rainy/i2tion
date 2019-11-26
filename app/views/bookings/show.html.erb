@@ -1,2 +1,21 @@
-<h1>Bookings#show</h1>
-<p>Find me in app/views/bookings/show.html.erb</p>
+<h1>Bookings + Reviews</h1>
+
+<ul><h4>Bookings</h4><%= link_to "🖋", edit_tutor_booking_path(@booking.tutor, @booking), class: "btn btn-outline-dark" %><%= link_to "🔥", tutor_booking_path(@booking.tutor, @booking), method: :delete, class: "btn btn-danger" %>
+  <li>Tutor: <%= @booking.tutor.user.name %></li>
+  <li>Customer: <%= @booking.user.name %></li>
+  <li>Location: <%= @booking.location %></li>
+  <li>Comments: <%= @booking.comments %></li>
+  <li>Start: <%= @booking.start_datetime %></li>
+  <li>End: <%= @booking.end_datetime %></li>
+</ul>
+
+<% if @booking.review != nil %>
+  <ul><h4>Reviews</h4>
+    <li>Content: <%= @booking.review.content %>
+      <%= link_to "🖋", edit_booking_review_path(@booking, @booking.review), class: "btn btn-outline-dark" %></li>
+      <%= link_to "🔥", booking_review_path(@booking, @booking.review), method: :delete, class: "btn btn-danger" %>
+    <li>Stars: <%= @booking.review.stars %></li>
+  </ul>
+<% else %>
+  <%= link_to "Create a review", new_booking_review_path(@booking) %>
+<% end %>

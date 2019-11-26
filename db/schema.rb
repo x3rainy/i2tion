@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2019_11_26_101134) do
     t.bigint "tutor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "review_id"
+    t.index ["review_id"], name: "index_bookings_on_review_id"
     t.index ["tutor_id"], name: "index_bookings_on_tutor_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_101134) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "reviews"
   add_foreign_key "bookings", "tutors"
   add_foreign_key "bookings", "users"
   add_foreign_key "reviews", "bookings"

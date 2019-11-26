@@ -3,7 +3,13 @@
 <ul>
   <% @bookings.sort.each do |booking| %>
   <li>
-    <%= booking.id %> <%= booking.location %> ---> <%= booking.start_datetime %>
+    Tutor: <%= booking.tutor.user.name %> <br>
+    Customer: <%= booking.user.name %> <br>
+    Location: <%= booking.location %> <br>
+    Comments: <%= booking.comments %>
+    Start: <%= booking.start_datetime %> <br>
+    End: <%= booking.end_datetime %>
+    <h4><%= link_to "View this booking", booking_path(booking) %></h4>
     <h4><%= link_to "Edit this booking", edit_tutor_booking_path(booking.tutor, booking.id) %></h4>
     <h5><%= link_to "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn btn-danger" %></h5>
   </li>
