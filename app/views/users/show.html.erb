@@ -1,2 +1,17 @@
+<div class="profile-container">
+  <div class="d-flex border-bottom mb-3">
+    <h2 class="mr-1">My user profile</h2>
+    <%= link_to edit_user_path(@user) do %>
+      <i class="fas fa-edit fa"></i>
+    <% end %>
+  </div>
+  <h5>Name: <%= @user.name %></h5>
+  <h5>Preferences: <%= @user.preference %></h5>
+  <h5>Contact: <%= @user.phone_number %></h5>
+</div>
 
-<h1>Hi<%= @user.name %></h1>
+<% if @tutor %>
+  <%= render 'shared/tutor_profile', tutor: @tutor %>
+<% else %>
+  <%= link_to 'Create a tutor profile', new_tutor_path, class: "d-flex justify-content-center" %>
+<% end %>

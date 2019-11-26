@@ -5,7 +5,8 @@
 <div class="d-flex flex-wrap m-3">
   <% @tutors.each do |tutor| %>
     <div class="card-product m-3">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <%= cl_image_tag tutor.photo, height: 300, width: 400, crop: :fill %>
+      <!-- <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" /> -->
       <div class="card-product-infos">
         <div class="d-flex justify-content-between">
           <p><strong>Name</strong>: <%= tutor.user['name'] %></p>

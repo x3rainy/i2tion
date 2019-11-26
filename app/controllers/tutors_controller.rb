@@ -30,7 +30,7 @@ class TutorsController < ApplicationController
         ts.save
       end
       flash[:notice] = "You created a tutor profile!"
-      redirect_to tutor_path(tutor)
+      redirect_to user_path(current_user)
     end
   end
 
@@ -51,7 +51,8 @@ class TutorsController < ApplicationController
         ts.save
       end
     end
-    redirect_to tutor_path(@tutor)
+    flash[:notice] = "Tutor profile updated!"
+    redirect_to user_path(current_user)
   end
 
   def destroy
@@ -66,6 +67,6 @@ class TutorsController < ApplicationController
   end
 
   def tutor_params
-    params.require(:tutor).permit(:age, :gender, :bio, :activity_status)
+    params.require(:tutor).permit(:age, :gender, :bio, :activity_status, :photo)
   end
 end

@@ -1,7 +1,9 @@
-<%= simple_form_for(@user) do |f| %>
-<%= f.input :name %>
-<%= f.input :preference %>
-<%= f.input :phone_number %>
-<%= f.button :submit, class: "btn btn-primary" %>
+<div class="d-flex justify-content-center align-items-center">
+  <%= simple_form_for(@user) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :preference %>
+  <%= f.input :phone_number %>
+  <%= f.button :submit, class: "btn btn-primary" %>
 
-<% end %>
+  <% end %>
+</div>

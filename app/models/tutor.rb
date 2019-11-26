@@ -1,4 +1,6 @@
 class Tutor < ApplicationRecord
+  mount_uploader :photo, PhotoUploader
+
   belongs_to :user
 
   has_many :tutor_specialisations, dependent: :destroy

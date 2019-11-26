@@ -1,0 +1,33 @@
+<div class="profile-container d-flex flex-wrap justify-content-center">
+  <div class="mr-3 mb-3">
+    <%= cl_image_tag tutor.photo, height: 200, width: 200, crop: :fill, radius: :max, format: :png %>
+  </div>
+
+  <div>
+    <div class="d-flex justify-content-between border-bottom mb-3">
+      <h2 class="mr-1">Tutor profile</h2>
+      <%= link_to edit_tutor_path(tutor) do %>
+        <i class="fas fa-edit fa"></i>
+      <% end %>
+      <%= link_to tutor_path(tutor), method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <i class="fas fa-trash-alt" style="color: #b86d40"></i>
+      <% end %>
+    </div>
+    <h5>Name: <%= tutor.user['name'] %></h5>
+
+    <h5>Age: <%= tutor.age %></h5>
+    <h5>Gender: <%= tutor.gender %></h5>
+    <h5>Bio: <%= tutor.bio %></h5>
+    <h5>Contact (HP): <%= tutor.user['phone_number'] %></h5>
+  </div>
+
+  <div class="specialization-container alert-info p-3">
+    <div class="border-bottom mb-2">
+      <h5>Specializations</h5>
+    </div>
+
+    <% tutor.specialisations.each do |specialisation| %>
+      <p class="m-0"><%= specialisation['name'] %></p>
+    <% end %>
+  </div>
+</div>
