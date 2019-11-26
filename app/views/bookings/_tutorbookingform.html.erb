@@ -1,0 +1,7 @@
+<%= simple_form_for [@tutor, @booking] do |f| -%>
+<%= f.input :location %>
+<%= f.input :comments %>
+<%= f.input :start_datetime %>
+<%= f.input :end_datetime %>
+<%= f.button :submit, class: "btn btn-primary" %>
+<% end -%>
