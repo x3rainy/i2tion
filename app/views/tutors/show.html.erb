@@ -22,6 +22,7 @@
     </div>
 
     <%= link_to 'Edit', edit_tutor_path(@tutor) %> <br>
-    <%= link_to 'Delete', tutor_path(@tutor), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Delete', tutor_path(@tutor), method: :delete, data: { confirm: 'Are you sure?' } %> <br>
+    <%= link_to 'Book Me!', new_tutor_booking_path(@tutor), class: 'btn btn-primary' %>
   </div>
 </div>
