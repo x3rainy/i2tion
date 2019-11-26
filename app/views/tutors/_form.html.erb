@@ -5,6 +5,8 @@
     <%= f.input :bio, placeholder: 'Type something about yourself' %>
     <%= f.input :activity_status, collection: ['active - if you are actively seeking jobs', 'inactive - if you do not want to be listed as a tutor'], as: :radio_buttons %>
     <%= f.association :specialisations %>
+    <%= f.input :photo %>
+    <%= f.input :photo_cache, as: :hidden %>
     <%= f.button :submit, class: 'btn btn-primary' %>
   <% end %>
 </div>

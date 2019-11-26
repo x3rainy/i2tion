@@ -1,12 +1,24 @@
 .profile-container {
   width: 80%;
+  max-width: 550px;
   margin: 30px auto;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  padding: 16px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
+
+.profile-container a {
+  height: fit-content;
+}
+
 
 .profile-container img {
   width: auto;
 }
 
 .specialization-container {
-  width: fit-content;
+  width: 80%;
+  max-width: 400px;
 }

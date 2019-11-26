@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @tutor = Tutor.find_by(user_id: current_user.id) if Tutor.exists?(user_id: current_user.id)
   end
 
   # def new
@@ -26,8 +27,10 @@ class UsersController < ApplicationController
     @user.preference = params[:user][:preference]
     @user.phone_number = params[:user][:phone_number]
     if @user.save
+      flash[:notice] = "User profile updated!"
       redirect_to user_path(@user)
     else
+      flash[:alert] = "Something went wrong!"
       render :edit
     end
   end
