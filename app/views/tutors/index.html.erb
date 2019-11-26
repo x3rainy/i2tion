@@ -1,7 +1,27 @@
 <% if @tutors.empty? %>
-  <h5>No tutors yet!</h5>
+  <p>No tutors yet!</p>
 <% end %>
 
-<% @tutors.each do |tutor| %>
-  <h5>tutor</h5>
-<% end %>
+<div class="d-flex flex-wrap m-3">
+  <% @tutors.each do |tutor| %>
+    <div class="card-product m-3">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <div class="card-product-infos">
+        <div class="d-flex justify-content-between">
+          <p><strong>Name</strong>: <%= tutor.user['name'] %></p>
+          <%= link_to 'View', tutor_path(tutor), class: "btn btn-sm btn-primary" %>
+        </div>
+        <p><strong>Age</strong>: <%= tutor.age %></p>
+        <p><strong>Gender</strong>: <%= tutor.gender %></p>
+        <div class="d-inline-block">
+          <p><strong>Specialisations</strong>:
+            <% tutor.specialisations.first(2).each_with_index do |specialisation, i| %>
+              <%= specialisation['name'] %> <%= '|' if tutor.specialisations.count != 1 && i + 1 < 2 %>
+            <% end %>
+            <%= '...+more' unless tutor.specialisations.count <= 2 %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

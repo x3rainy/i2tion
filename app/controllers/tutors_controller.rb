@@ -6,7 +6,6 @@ class TutorsController < ApplicationController
   end
 
   def show
-    # @tutor_specialisation = TutorSpecialisation.new
   end
 
   def new
@@ -14,11 +13,24 @@ class TutorsController < ApplicationController
   end
 
   def create
-    @tutor = Tutor.new(tutor_params)
-    if @tutor.save!
+    if Tutor.exists?(user_id: current_user.id)
+      flash[:alert] = "You already have a tutor profile!"
       redirect_to tutors_path
     else
-      render :new
+      tutor = Tutor.new(tutor_params)
+      tutor.user = current_user
+      tutor.save
+
+      params['tutor']['specialisation_ids'].delete('')
+      params['tutor']['specialisation_ids'].each do |spe_id|
+        ts = TutorSpecialisation.new
+        ts.specialisation = Specialisation.find(spe_id)
+        ts.tutor = tutor
+
+        ts.save
+      end
+      flash[:notice] = "You created a tutor profile!"
+      redirect_to tutor_path(tutor)
     end
   end
 
@@ -26,12 +38,25 @@ class TutorsController < ApplicationController
   end
 
   def update
-    redirect_to tutor_path(@tutor) if @tutor.update(tutor_params)
+    @tutor.update(tutor_params)
+    params['tutor']['specialisation_ids'].delete('')
+    unless @tutor.specialisation_ids == params['tutor']['specialisation_ids'].map(&:to_i)
+      @tutor.specialisations.destroy_all
+
+      params['tutor']['specialisation_ids'].each do |spe_id|
+        ts = TutorSpecialisation.new
+        ts.specialisation = Specialisation.find(spe_id)
+        ts.tutor = @tutor
+
+        ts.save
+      end
+    end
+    redirect_to tutor_path(@tutor)
   end
 
   def destroy
     @tutor.destroy
-    redirect_to root_path
+    redirect_to tutors_path
   end
 
   private
