@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
+  resources :users, except: [:new, :create, :index, :delete] do
+    resources :bookings, except: [:new, :create]
+  end
 
-  resources :users, except: [:new, :create, :index, :delete]
-  resources :tutors
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :tutors do
+    resources :bookings
+  end
 end
