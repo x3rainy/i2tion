@@ -47,7 +47,11 @@ puts "seeding 10 users..."
 names_array = %w(one two three four five six seven eight nine ten)
 names_array.each do |number|
   string = number + "@lewagon.com"
-  a = User.new(email: string, password: "helloworld")
+  array = %w[Benjamin Brayden Bryson Brandon Braxton Brody Bennett Olivia Oliver Amelia George Isla Harry Ava Noah Emily Jack Sophia Charlie Grace Leo Mia Jacob Poppy Freddie Ella Alfie]
+  space = " "
+  name2 = array.sample + space
+  name3 = name2 + array.sample
+  a = User.new(email: string, password: "helloworld", name: name3, preference: "No Preferences!", phone_number: "12345678")
   a.save
 end
 
