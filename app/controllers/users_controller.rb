@@ -26,13 +26,15 @@ class UsersController < ApplicationController
     @user.name = params[:user][:name]
     @user.preference = params[:user][:preference]
     @user.phone_number = params[:user][:phone_number]
-    if @user.save
+    if (@user.name.blank? || @user.phone_number.blank?) && current_user.tutor
+      flash[:alert] = "Your name and phone number cannot be blank since you have a tutor profile!"
+    elsif @user.save
       flash[:notice] = "User profile updated!"
-      redirect_to user_path(@user)
     else
       flash[:alert] = "Something went wrong!"
       render :edit
     end
+    redirect_to user_path(@user)
   end
 
   private
