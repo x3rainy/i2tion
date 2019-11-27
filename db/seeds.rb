@@ -14,7 +14,6 @@ Tutor.destroy_all
 puts "destroying users..."
 User.destroy_all
 puts "destroying specialisations..."
-TutorSpecialisation.destroy_all
 Specialisation.destroy_all
 
 puts "seeding specialisations..."
