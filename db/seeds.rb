@@ -5,16 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-puts "destroying bookings..."
-Booking.destroy_all
 puts "destroying TutorSpecialisation..."
 TutorSpecialisation.destroy_all
+puts "destroying specialisations..."
+Specialisation.destroy_all
+puts "destroying reviews..."
+Review.all.destroy_all
+puts "destroying bookings..."
+Booking.destroy_all
 puts "destroying tutors..."
 Tutor.destroy_all
 puts "destroying users..."
 User.destroy_all
-puts "destroying specialisations..."
-Specialisation.destroy_all
+
+
+
+
+
 
 puts "seeding specialisations..."
 specialisations_array = [
@@ -46,7 +53,7 @@ puts "seeding 10 users..."
 names_array = %w(one two three four five six seven eight nine ten)
 names_array.each do |number|
   string = number + "@lewagon.com"
-  array = %w[Benjamin Brayden Bryson Brandon Braxton Brody Bennett Olivia Oliver Amelia George Isla Harry Ava Noah Emily Jack Sophia Charlie Grace Leo Mia Jacob Poppy Freddie Ella Alfie]
+  array = %w[Audrina Courtney Angelique Meaghan Dior Adalee Palmer Oaklynn Haisley Keily Novah Yara Ensley Liam Noah William James Oliver Benjamin Elijah Lucas Mason Logan Austin Alva Acacius Tate Diego Adah Reese Mika Paisley Amina Ellis Phoenix Remy Marlowe Shea Ava Isabella Sophia Charlotte Mia Amelia Harper Evelyn Benjamin Brayden Bryson Brandon Braxton Brody Bennett Olivia Oliver Amelia George Isla Harry Ava Noah Emily Jack Sophia Charlie Grace Leo Mia Jacob Poppy Freddie Ella Alfie]
   space = " "
   name2 = array.sample + space
   name3 = name2 + array.sample
@@ -66,12 +73,21 @@ r = 0
   r += 1
 }
 
-puts "seeding 10 bookings"
+puts "seeding 10 bookings..."
 allusers = User.all.sort
 tutors = allusers.slice(0..4)
 10.times {
   a = Booking.new(user: allusers.sample, tutor: tutors.sample.tutor, start_datetime: DateTime.now, end_datetime: DateTime.now, location: "To Be Confirmed", comments: "No Comments Yet")
   a.save
+}
+
+puts "seeding 5 reviews..."
+allbookings = Booking.all.sort
+r = 0
+5.times{
+  a = Review.new(booking: allbookings[r], content: "Meh it was fine but i've seen better tutors!", stars: rand(0..5))
+  a.save
+  r += 1
 }
 
 puts "finished!"
