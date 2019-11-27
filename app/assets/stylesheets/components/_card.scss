@@ -1,12 +1,16 @@
 .card-product {
   overflow: hidden;
   height: 120px;
-  background: white;
+  background: #F8F8F8;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   border-radius: 4px;
-  width: 430px;
+  width: 344px;
+
+  &:hover {
+    box-shadow: inset 0 0 30px rgba(0,0,0,.075), 0 0 60px rgba(253, 236, 110, 0.6);
+  }
 }
 
 .card-product img {
