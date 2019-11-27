@@ -10,10 +10,12 @@
   <div>
     <div class="d-flex justify-content-between border-bottom mb-3">
       <h2 class="mr-1">Tutor profile</h2>
+      <% if tutor == current_user.tutor %>
       <%= link_to edit_tutor_path(tutor) do %>
         <i class="fas fa-edit fa"></i>
       <% end %>
       <%= link_to tutor_path(tutor), method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <% end %>
         <i class="fas fa-trash-alt" style="color: #b86d40"></i>
       <% end %>
     </div>
