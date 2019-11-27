@@ -16,21 +16,21 @@ class TutorsController < ApplicationController
     if Tutor.exists?(user_id: current_user.id)
       flash[:alert] = "You already have a tutor profile!"
       redirect_to tutors_path
-    else
-      tutor = Tutor.new(tutor_params)
-      tutor.user = current_user
-      tutor.save
-
-      params['tutor']['specialisation_ids'].delete('')
-      params['tutor']['specialisation_ids'].each do |spe_id|
-        ts = TutorSpecialisation.new
-        ts.specialisation = Specialisation.find(spe_id)
-        ts.tutor = tutor
-
-        ts.save
-      end
+    end
+    tutor = Tutor.new(tutor_params)
+    tutor.user = current_user
+    spec_array = params['tutor']['specialisation_ids']
+    if spec_array.empty? == false
+      spec_array.delete_at(0)
+      spec_array.each { |id| tutor.specialisations << Specialisation.find(id) }
+    end
+    if tutor.save
       flash[:notice] = "You created a tutor profile!"
       redirect_to user_path(current_user)
+    else
+      flash[:alert] = "Please only input valid parameters"
+      @tutor = Tutor.new
+      render :new
     end
   end
 
@@ -38,26 +38,25 @@ class TutorsController < ApplicationController
   end
 
   def update
-    @tutor.update(tutor_params)
-    params['tutor']['specialisation_ids'].delete('')
-    unless @tutor.specialisation_ids == params['tutor']['specialisation_ids'].map(&:to_i)
-      @tutor.specialisations.destroy_all
-
-      params['tutor']['specialisation_ids'].each do |spe_id|
-        ts = TutorSpecialisation.new
-        ts.specialisation = Specialisation.find(spe_id)
-        ts.tutor = @tutor
-
-        ts.save
+    if @tutor.update(tutor_params)
+      spec_array = params['tutor']['specialisation_ids']
+      if spec_array.empty? == false
+        spec_array.delete_at(0)
+        spec_array.each { |id| @tutor.specialisations << Specialisation.find(id) }
       end
+      @tutor.save
+      flash[:notice] = "You have updated your tutor profile!"
+      redirect_to user_path(current_user)
+    else
+      flash[:alert] = "Please only input valid parameters"
+      @tutor = Tutor.find(params[:id])
+      render :edit
     end
-    flash[:notice] = "Tutor profile updated!"
-    redirect_to user_path(current_user)
   end
 
   def destroy
     @tutor.destroy
-    redirect_to tutors_path
+    redirect_to user_path(current_user)
   end
 
   private
