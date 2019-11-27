@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @tutor = Tutor.find_by(user_id: current_user.id) if Tutor.exists?(user_id: current_user.id)
+    @tutor = @user.tutor_profile if @user.is_tutor?
   end
 
   # def new
