@@ -1,23 +1,51 @@
 <div class="container d-flex flex-column justify-content-center align-items-center">
-  <% @bookings.sort.each do |booking| %>
-  <div class="d-flex flex-column my-3">
-    <div class="card-product">
-    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-      <div class="card-product-infos">
-      <h2>Booking with <%= booking.tutor.user.name %> </h2>
-      <p>Location: <%= booking.location %></p>
-      <p>Comments: <%= booking.comments %></p>
-      <p>Start: <%= booking.start_datetime %></p>
-      <p>End: <%= booking.end_datetime %></p>
-      </div>
-    </div>
-    <div class="btn btn-outline-dark btn-lg">
-      <div class="d-flex justify-content-around align-items-center ">
-      <h4><%= link_to "🔍", booking_path(booking), class: "btn btn-light" %></h4>
-      <h4><%= link_to "🖋", edit_tutor_booking_path(booking.tutor, booking.id), class: "btn btn-light" %></h4>
-      <h4><%= link_to "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn btn-danger" %>
-      </div>
-    </div>
-  </div>
+  <% if params[:tutor_id].nil? %>
+        <% @bookings.sort.each do |booking| %>
+        <% if booking.user == current_user %>
+        <div class="d-flex flex-column my-3">
+          <div class="card-product">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+            <div class="card-product-infos">
+            <h2>Booking with <%= booking.tutor.user.name %> </h2>
+            <p>Location: <%= booking.location %></p>
+            <p>Comments: <%= booking.comments %></p>
+            <p>Start: <%= booking.start_datetime %></p>
+            <p>End: <%= booking.end_datetime %></p>
+            </div>
+          </div>
+          <div class="btn btn-outline-dark btn-lg">
+            <div class="d-flex justify-content-around align-items-center ">
+            <h4><%= link_to "🔍", booking_path(booking), class: "btn btn-light" %></h4>
+            <h4><%= link_to "🖋", edit_tutor_booking_path(booking.tutor, booking.id), class: "btn btn-light" %></h4>
+            <h4><%= link_to "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn btn-danger" %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+  <% else %>
+        <% @bookings.sort.each do |booking| %>
+        <% if booking.tutor == current_user.tutor %>
+        <div class="d-flex flex-column my-3">
+          <div class="card-product">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+            <div class="card-product-infos">
+            <h2>Booking with <%= booking.tutor.user.name %> </h2>
+            <p>Location: <%= booking.location %></p>
+            <p>Comments: <%= booking.comments %></p>
+            <p>Start: <%= booking.start_datetime %></p>
+            <p>End: <%= booking.end_datetime %></p>
+            </div>
+          </div>
+          <div class="btn btn-outline-dark btn-lg">
+            <div class="d-flex justify-content-around align-items-center ">
+            <h4><%= link_to "🔍", booking_path(booking), class: "btn btn-light" %></h4>
+            <h4><%= link_to "🖋", edit_tutor_booking_path(booking.tutor, booking.id), class: "btn btn-light" %></h4>
+            <h4><%= link_to "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn btn-danger" %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
   <% end %>
 </div>
