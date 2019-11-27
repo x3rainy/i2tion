@@ -23,23 +23,18 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.name = params[:user][:name]
-    @user.preference = params[:user][:preference]
-    @user.phone_number = params[:user][:phone_number]
-    if (@user.name.blank? || @user.phone_number.blank?) && current_user.tutor
+    if (params[:user][:name] == "" || params[:user][:phone_number] == "") && current_user.tutor
       flash[:alert] = "Your name and phone number cannot be blank since you have a tutor profile!"
-    elsif @user.save
-      flash[:notice] = "User profile updated!"
     else
-      flash[:alert] = "Something went wrong!"
-      render :edit
+      @user.update(user_params)
+      flash[:notice] = "User profile updated!"
     end
-    redirect_to user_path(@user)
+    redirect_to user_path(current_user)
   end
 
   private
 
   def user_params
-    params.permit(:user).require(:name, :preference, :phone_number)
+    params.require(:user).permit(:name, :preference, :phone_number)
   end
 end
