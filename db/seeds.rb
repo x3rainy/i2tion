@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "destroying bookings..."
 Booking.destroy_all
+puts "destroying TutorSpecialisation..."
+TutorSpecialisation.destroy_all
 puts "destroying tutors..."
 Tutor.destroy_all
 puts "destroying users..."
@@ -54,6 +56,7 @@ allusers = User.all.sort
 r = 0
 5.times {
   b = Tutor.new(user: allusers[r], age: 20, gender: "male", bio: "helloworld", activity_status: true)
+  b.specialisations << Specialisation.all.sample
   b.save
   r += 1
 }
