@@ -15,11 +15,11 @@
 <% else %>
   <div class="text-center">
     <% if @user.name.blank? || @user.phone_number.blank? %>
-      <%= link_to 'Create a tutor profile', user_path(@user), onclick: 'alert("Required name and contact fields!")' %>
-      <p class="font-italic font-weight-light mt-3">Note: You have to have a name and phone number before creating a tutor profile!</p>
+      <%= link_to 'Create a tutor profile', user_path(@user), onclick: 'alert("Required name and contact fields!")', class: "btn btn-info" %>
+      <p class="text-white bg-danger font-italic mt-3">Note: You have to have a name and phone number before creating a tutor profile!</p>
     <% else %>
-      <%= link_to 'Create a tutor profile', new_tutor_path %>
-      <p class="font-italic font-weight-light mt-3">You can create a tutor profile now!</p>
+      <%= link_to 'Create a tutor profile', new_tutor_path, class: "btn btn-info" %>
+      <p class="text-white bg-success font-italic mt-3">You can create a tutor profile now!</p>
     <% end %>
   </div>
 <% end %>
