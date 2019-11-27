@@ -2,7 +2,7 @@
   <% @bookings.sort.each do |booking| %>
   <div class="d-flex flex-column my-3">
     <div class="card-product">
-    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <%= cl_image_tag booking.tutor.photo, width: 300, height: 400, crop: :fill, gravity: :face %>
       <div class="card-product-infos">
       <h2>Booking with <%= booking.tutor.user.name %> </h2>
       <p>Location: <%= booking.location %></p>
