@@ -14,7 +14,7 @@
   <%= render 'shared/tutor_profile', tutor: @tutor %>
 <% else %>
   <div class="text-center">
-    <% if @user.name.blank? && @user.phone_number.blank? %>
+    <% if @user.name.blank? || @user.phone_number.blank? %>
       <%= link_to 'Create a tutor profile', user_path(@user), onclick: 'alert("Required name and contact fields!")' %>
       <p class="font-italic font-weight-light mt-3">Note: You have to have a name and phone number before creating a tutor profile!</p>
     <% else %>

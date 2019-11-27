@@ -2,9 +2,9 @@
   <% if params[:tutor_id].nil? %>
         <% @bookings.sort.each do |booking| %>
         <% if booking.user == current_user %>
-        <div class="d-flex flex-column my-3">
+         <div class="d-flex flex-column my-3">
           <div class="card-product">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+            <%= cl_image_tag booking.tutor.photo, width: 300, height: 400, crop: :fill, gravity: :face %>
             <div class="card-product-infos">
             <h2>Booking with <%= booking.tutor.user.name %> </h2>
             <p>Location: <%= booking.location %></p>
@@ -20,17 +20,16 @@
             <h4><%= link_to "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn btn-danger" %>
             </div>
           </div>
-        </div>
         <% end %>
         <% end %>
   <% else %>
         <% @bookings.sort.each do |booking| %>
         <% if booking.tutor == current_user.tutor %>
-        <div class="d-flex flex-column my-3">
+         <div class="d-flex flex-column my-3">
           <div class="card-product">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+            <%= cl_image_tag booking.tutor.photo, width: 300, height: 400, crop: :fill, gravity: :face %>
             <div class="card-product-infos">
-            <h2>Booking with <%= booking.tutor.user.name %> </h2>
+            <h2>Booked by <%= booking.user.name %> </h2>
             <p>Location: <%= booking.location %></p>
             <p>Comments: <%= booking.comments %></p>
             <p>Start: <%= booking.start_datetime %></p>
@@ -44,7 +43,6 @@
             <h4><%= link_to "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn btn-danger" %>
             </div>
           </div>
-        </div>
         <% end %>
         <% end %>
   <% end %>

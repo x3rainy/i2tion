@@ -18,7 +18,7 @@
             </p>
             <p><strong>Stars:</strong> <%= @booking.review.stars %></p>
               <%= link_to "🖋", edit_booking_review_path(@booking, @booking.review), class: "btn btn-outline-dark" %>
-              <%= link_to "🔥", booking_review_path(@booking, @booking.review), method: :delete, class: "btn btn-danger" %>
+               <%= link_to "🔥", booking_review_path(@booking, @booking.review), method: :delete, class: "btn btn-danger" %>
         <% else %>
           <%= link_to "Review this booking", new_booking_review_path(@booking), class: "btn btn-lg btn-outline-dark" %>
         <% end %>
