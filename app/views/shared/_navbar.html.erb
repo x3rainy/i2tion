@@ -20,8 +20,8 @@
           <%= link_to "Placeholder", "#", class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
-          <% if Tutor.exists?(user_id: current_user.id) %>
-            <% tutor = Tutor.find_by(user_id: current_user.id) %>
+          <% if current_user.is_tutor? %>
+            <% tutor = current_user.tutor_profile %>
             <%= cl_image_tag tutor.photo, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% else %>
             <%= image_tag "https://via.placeholder.com/150", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
