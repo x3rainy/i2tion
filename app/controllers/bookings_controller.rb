@@ -48,7 +48,11 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     if @booking.update(booking_params)
-      redirect_to tutor_bookings_path(@booking.tutor)
+      if params[:user_id].nil?
+        redirect_to user_bookings_path(current_user)
+      else
+        redirect_to tutor_bookings_path(current_user.tutor)
+      end
     else
       render :edit
     end
@@ -61,7 +65,7 @@ class BookingsController < ApplicationController
     if params[:user_id].nil?
       redirect_to user_bookings_path(current_user)
     else
-      redirect_to tutor_bookings_path
+      redirect_to tutor_bookings_path(current_user.tutor)
     end
   end
 
