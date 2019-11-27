@@ -55,7 +55,9 @@ puts "seeding 5 tutors..."
 allusers = User.all.sort
 r = 0
 5.times {
-  b = Tutor.new(user: allusers[r], age: 20, gender: "male", bio: "helloworld", activity_status: true)
+  b = Tutor.new(user: allusers[r], bio: "helloworld", activity_status: "true")
+  b.age = rand(18..75)
+  b.gender = ["Male", "Female", "Male", "Female", "Male", "Female", "Nonbinary", "Genderfluid"].sample
   b.specialisations << Specialisation.all.sample
   b.save
   r += 1
