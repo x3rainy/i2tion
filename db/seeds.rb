@@ -43,7 +43,6 @@ specialisations_array.each do |spec|
   a.save
 end
 
-
 puts "seeding 10 users..."
 names_array = %w(one two three four five six seven eight nine ten)
 names_array.each do |number|
@@ -60,7 +59,7 @@ puts "seeding 5 tutors..."
 allusers = User.all.sort
 r = 0
 5.times {
-  b = Tutor.new(user: allusers[r], bio: "helloworld", activity_status: "true")
+  b = Tutor.new(user: allusers[r], bio: "helloworld", activity_status: "true", remote_photo_url: 'https://i.pravatar.cc/300')
   b.age = rand(18..75)
   b.gender = ["Male", "Female", "Male", "Female", "Male", "Female", "Nonbinary", "Genderfluid"].sample
   b.specialisations << Specialisation.all.sample
