@@ -4,11 +4,17 @@ class ApplicationController < ActionController::Base
 
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+  after_action :verify_authorized, if: :booking_index?
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
+
+
+  def booking_index?
+    params[:action] == "index" && params[:controller] == "bookings"
+  end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/

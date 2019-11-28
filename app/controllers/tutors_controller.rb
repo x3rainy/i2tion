@@ -2,8 +2,7 @@ class TutorsController < ApplicationController
   before_action :set_tutor, only: %i[show edit update destroy]
 
   def index
-    @bookings = policy_scope(Booking)
-    @tutors = Tutor.all
+    @tutors = policy_scope(Tutor)
   end
 
   def show
