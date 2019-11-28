@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    if (params[:id]) == "new" || (params[:id]) == "create"
+    if (params[:id] == "new") || (params[:id] == "create")
       @tutor = Tutor.find(params[:tutor_id])
       redirect_to tutor_bookings_path(@tutor)
     else
@@ -20,7 +20,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    a = Booking.new()
+    a = Booking.new
     a.user = current_user
     a.tutor = Tutor.find(params[:tutor_id])
     if a.update(booking_params)
@@ -50,8 +50,13 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking = Booking.find(params[:id])
-    @booking.review.destroy if @booking.review != nil
-    @booking.destroy
+    @booking.canceller = current_user.name
+    if @booking.cancelled
+      @booking.destroy
+    else
+      @booking.cancelled = true
+    end
+    @booking.save
     if @booking.user == current_user
       redirect_to user_bookings_path(current_user)
     else
