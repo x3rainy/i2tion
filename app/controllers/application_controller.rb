@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   def record_not_found
     flash[:alert] = "This item does not exist."
     redirect_to(request.referrer || root_path)
+  end
 
   def after_sign_in_path_for(resource)
     tutors_path
