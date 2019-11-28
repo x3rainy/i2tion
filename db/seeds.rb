@@ -64,6 +64,7 @@ r = 0
   b.age = rand(12..90)
   b.gender = ["Male", "Female", "Male", "Female", "Male", "Female", "Nonbinary", "Genderfluid"].sample
   b.specialisations << Specialisation.all.sample
+  b.activity_status = %w[Active Inactive].sample
   b.save
   r += 1
 }

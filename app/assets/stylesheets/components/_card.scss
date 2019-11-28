@@ -47,6 +47,22 @@
 }
 
 .card-product .card-product-infos {
-  padding: 8px 0 8px;
+  padding: 8px 0 8px 8px;
   width: 500px;
+}
+
+.card-body {
+  position: relative;
+
+  .booking-avatar {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+  }
+
+  .booking-view-tutor {
+    position: absolute;
+    top: 210px;
+    right: 50px;
+  }
 }
