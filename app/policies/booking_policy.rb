@@ -6,7 +6,12 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def index?
-    return true
+    if record.tutor.nil?
+      return true if record.user == user
+    else
+      return true if record.tutor == user.tutor
+    end
+    return false
   end
 
   def show?
