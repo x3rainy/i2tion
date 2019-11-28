@@ -14,13 +14,8 @@ class BookingsController < ApplicationController
   end
 
   def show
-    # if (params[:id]) == "new" || (params[:id]) == "create"
-    #   @tutor = Tutor.find(params[:tutor_id])
-    #   redirect_to tutor_bookings_path(@tutor)
-    # else
     @booking = Booking.find(params[:id])
     authorize @booking
-    # end
   end
 
   def new
