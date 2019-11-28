@@ -18,8 +18,8 @@ class BookingsController < ApplicationController
     #   @tutor = Tutor.find(params[:tutor_id])
     #   redirect_to tutor_bookings_path(@tutor)
     # else
-      @booking = Booking.find(params[:id])
-      authorize @booking
+    @booking = Booking.find(params[:id])
+    authorize @booking
     # end
   end
 
@@ -33,7 +33,7 @@ class BookingsController < ApplicationController
 
   def create
     authorize Booking.new(tutor: Tutor.find(params[:tutor_id]))
-    a = Booking.new()
+    a = Booking.new
     a.user = current_user
     a.tutor = Tutor.find(params[:tutor_id])
     if a.update(booking_params)
@@ -68,9 +68,14 @@ class BookingsController < ApplicationController
   def destroy
     @booking = Booking.find(params[:id])
     authorize @booking
-    # @booking.review.destroy if @booking.review != nil WE ARE NO LONGER DESTROYING REVIEWS
-    @booking.destroy
-    flash[:notice] = "Booking Deleted!"
+    @booking.canceller = current_user.name
+    if @booking.cancelled
+      @booking.destroy
+      flash[:notice] = "Booking Deleted!"
+    else
+      @booking.cancelled = true
+    end
+    @booking.save
     if @booking.user == current_user
       redirect_to user_bookings_path(current_user)
     else
