@@ -2,6 +2,10 @@
   <% if params[:tutor_id].nil? %>
     <h1 class="text-light">My Bookings</h1>
   <!-- Current User is looking at "MY BOOKING" - A List of all tutors I have booked -->
+    <% if @bookings.empty? %>
+      <p class="w-100 text-center bg-info font-italic mt-3 p-2">No bookings yet!</p>
+      <%= link_to "Start finding a tutor here!", tutors_path, class: "btn btn-primary" %>
+    <% end %>
     <% @bookings.sort.each do |booking| %>
       <% if booking.user == current_user %>
       <!-- Display only bookings who I booked -->
@@ -37,6 +41,9 @@
   <% else %>
   <!-- Tutor is looking at "MY APPOINTMENTS" - A List of all customers who booked me -->
     <h1 class="text-light">My Appointments</h1>
+    <% if @bookings.empty? %>
+      <p class="w-100 text-center bg-info font-italic mt-3 p-2">No appointments yet, wait for someone to book you!</p>
+    <% end %>
     <% @bookings.sort.each do |booking| %>
     <% if booking.tutor == current_user.tutor %>
       <!-- Display only bookings that booked me, not everyone else's bookings -->
@@ -51,11 +58,7 @@
           <div class="card-product-infos pl-3">
             <% if booking.cancelled %>
               <div class="text-center">
-                <% if booking.user == current_user %>
-                  <h2 class="mb-2">This booking has been cancelled by <%= booking.user.name %></h2>
-                <% else %>
-                  <h2 class="mb-2">This booking has been cancelled by <%= current_user.name %></h2>
-                <% end %>
+                <h2 class="mb-2">This booking has been cancelled by <%= booking.canceller %></h2>
               </div>
             <% else %>
               <h2>Booked by <%= booking.user.name %> </h2>
