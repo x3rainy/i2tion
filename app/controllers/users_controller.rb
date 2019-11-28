@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    authorize User.find(params[:id])
+    @user = current_user
     @tutor = @user.tutor
   end
 
@@ -18,10 +19,12 @@ class UsersController < ApplicationController
   # end
 
   def edit
+    authorize User.find(params[:id])
     @user = User.find(params[:id])
   end
 
   def update
+    authorize User.find(params[:id])
     @user = User.find(params[:id])
     if (params[:user][:name] == "" || params[:user][:phone_number] == "") && current_user.tutor
       flash[:alert] = "Your name and phone number cannot be blank since you have a tutor profile!"
