@@ -17,9 +17,15 @@
             </p>
             <p><strong>Stars:</strong> <%= @booking.review.stars %></p>
               <%= link_to "🖋", edit_booking_review_path(@booking, @booking.review), class: "btn btn-outline-dark" %>
+              <% if policy(Review).destroy? %>
                <%= link_to "🔥", booking_review_path(@booking, @booking.review), method: :delete, class: "btn btn-danger" %>
+               <% end %>
         <% else %>
+        <% if current_user.tutor.nil? == false && @booking.tutor == current_user.tutor %>
+          <%= link_to "Back to My Appointments", tutor_bookings_path(current_user.tutor.bookings), class: "btn btn-lg btn-outline-dark" %>
+          <% else %>
           <%= link_to "Review this booking", new_booking_review_path(@booking), class: "btn btn-lg btn-outline-dark" %>
+        <% end %>
         <% end %>
     </div>
   </div>

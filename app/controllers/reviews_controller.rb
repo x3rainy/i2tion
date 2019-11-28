@@ -1,14 +1,17 @@
 class ReviewsController < ApplicationController
   def new
     @booking = Booking.find(params[:booking_id])
-    @review = Review.new
+    @review = Review.new(booking: @booking)
+    authorize @review
   end
 
   def create
     @review = Review.new(review_params)
     @booking = Booking.find(params[:booking_id])
     @review.booking = @booking
+    authorize @review
     if @review.save
+      flash[:notice] = "Review Created!"
       redirect_to booking_path(@booking)
     else
       render :new
@@ -18,12 +21,15 @@ class ReviewsController < ApplicationController
   def edit
     @review = Review.find(params[:id])
     @booking = @review.booking
+    authorize @review
   end
 
   def update
     @review = Review.find(params[:id])
     @booking = @review.booking
+    authorize @review
     if @review.update(review_params)
+      flash[:notice] = "Review Updated!"
       redirect_to booking_path(@booking)
     else
       render :edit
@@ -32,8 +38,10 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
+    authorize @review
     @booking = @review.booking
     @review.destroy
+    flash[:notice] = "Review Deleted!"
     redirect_to booking_path(@booking)
   end
 
