@@ -44,8 +44,8 @@ specialisations_array.each do |spec|
   a.save
 end
 
-puts "seeding 20 users..."
-names_array = %w(one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty)
+puts "seeding 100 users..."
+names_array = [*"1".."100"]
 names_array.each do |number|
   string = number + "@lewagon.com"
   array = %w[Audrina Courtney Angelique Meaghan Dior Adalee Palmer Oaklynn Haisley Keily Novah Yara Ensley Liam Noah William James Oliver Benjamin Elijah Lucas Mason Logan Austin Alva Acacius Tate Diego Adah Reese Mika Paisley Amina Ellis Phoenix Remy Marlowe Shea Ava Isabella Sophia Charlotte Mia Amelia Harper Evelyn Benjamin Brayden Bryson Brandon Braxton Brody Bennett Olivia Oliver Amelia George Isla Harry Ava Noah Emily Jack Sophia Charlie Grace Leo Mia Jacob Poppy Freddie Ella Alfie]
@@ -56,10 +56,10 @@ names_array.each do |number|
   a.save
 end
 
-puts "seeding 15 tutors..."
+puts "seeding 50 tutors..."
 allusers = User.all.sort
 r = 0
-15.times {
+50.times {
   b = Tutor.new(user: allusers[r], bio: "helloworld", activity_status: "true", remote_photo_url: 'https://i.pravatar.cc/300')
   b.age = rand(12..90)
   b.gender = ["Male", "Female", "Male", "Female", "Male", "Female", "Nonbinary", "Genderfluid"].sample
@@ -69,18 +69,18 @@ r = 0
   r += 1
 }
 
-puts "seeding 20 bookings..."
+puts "seeding 100 bookings..."
 allusers = User.all.sort
 tutors = allusers.slice(0..4)
-20.times {
+100.times {
   a = Booking.new(user: allusers.sample, tutor: tutors.sample.tutor, start_datetime: DateTime.now, end_datetime: DateTime.now, location: "To Be Confirmed", comments: "No Comments Yet")
   a.save
 }
 
-puts "seeding 20 reviews..."
+puts "seeding 80 reviews..."
 allbookings = Booking.all.sort
 r = 0
-20.times{
+80.times{
   a = Review.new(booking: allbookings[r], content: "Meh it was fine but i've seen better tutors!", stars: rand(0..5))
   a.save
   r += 1
