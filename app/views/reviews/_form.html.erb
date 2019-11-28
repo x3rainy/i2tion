@@ -1,5 +1,7 @@
-<%= simple_form_for [booking, review] do |f| -%>
-  <%= f.input :content %>
-  <%= f.input :stars %>
-  <%= f.button :submit, class: "btn btn-primary" %>
-<% end -%>
+<div class="d-flex justify-content-center align-items-center">
+  <%= simple_form_for [booking, review] do |f| -%>
+    <%= f.input :content %>
+    <%= f.input :stars %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  <% end -%>
+</div>
