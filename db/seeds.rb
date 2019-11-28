@@ -44,22 +44,22 @@ specialisations_array.each do |spec|
   a.save
 end
 
-puts "seeding 15 users..."
-names_array = %w(one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen)
+puts "seeding 20 users..."
+names_array = %w(one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty)
 names_array.each do |number|
   string = number + "@lewagon.com"
   array = %w[Audrina Courtney Angelique Meaghan Dior Adalee Palmer Oaklynn Haisley Keily Novah Yara Ensley Liam Noah William James Oliver Benjamin Elijah Lucas Mason Logan Austin Alva Acacius Tate Diego Adah Reese Mika Paisley Amina Ellis Phoenix Remy Marlowe Shea Ava Isabella Sophia Charlotte Mia Amelia Harper Evelyn Benjamin Brayden Bryson Brandon Braxton Brody Bennett Olivia Oliver Amelia George Isla Harry Ava Noah Emily Jack Sophia Charlie Grace Leo Mia Jacob Poppy Freddie Ella Alfie]
   space = " "
   name2 = array.sample + space
   name3 = name2 + array.sample
-  a = User.new(email: string, password: "helloworld", name: name3, preference: "No Preferences!", phone_number: "12345678")
+  a = User.new(email: string, password: "password", name: name3, preference: "No Preferences!", phone_number: "12345678")
   a.save
 end
 
-puts "seeding 10 tutors..."
+puts "seeding 15 tutors..."
 allusers = User.all.sort
 r = 0
-10.times {
+15.times {
   b = Tutor.new(user: allusers[r], bio: "helloworld", activity_status: "true", remote_photo_url: 'https://i.pravatar.cc/300')
   b.age = rand(12..90)
   b.gender = ["Male", "Female", "Male", "Female", "Male", "Female", "Nonbinary", "Genderfluid"].sample
@@ -68,18 +68,18 @@ r = 0
   r += 1
 }
 
-puts "seeding 15 bookings..."
+puts "seeding 20 bookings..."
 allusers = User.all.sort
 tutors = allusers.slice(0..4)
-15.times {
+20.times {
   a = Booking.new(user: allusers.sample, tutor: tutors.sample.tutor, start_datetime: DateTime.now, end_datetime: DateTime.now, location: "To Be Confirmed", comments: "No Comments Yet")
   a.save
 }
 
-puts "seeding 10 reviews..."
+puts "seeding 20 reviews..."
 allbookings = Booking.all.sort
 r = 0
-10.times{
+20.times{
   a = Review.new(booking: allbookings[r], content: "Meh it was fine but i've seen better tutors!", stars: rand(0..5))
   a.save
   r += 1

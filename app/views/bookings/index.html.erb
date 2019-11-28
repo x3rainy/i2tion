@@ -1,6 +1,6 @@
-<div class="container d-flex flex-column justify-content-center align-items-center p-3">
+<div class="container d-flex flex-column justify-content-center align-items-center p-3 mt-5">
   <% if params[:tutor_id].nil? %>
-    <h1>My Bookings</h1>
+    <h1 class="text-light">My Bookings</h1>
   <!-- Current User is looking at "MY BOOKING" - A List of all tutors I have booked -->
     <% @bookings.sort.each do |booking| %>
       <% if booking.user == current_user %>
@@ -36,7 +36,7 @@
     <% end %>
   <% else %>
   <!-- Tutor is looking at "MY APPOINTMENTS" - A List of all customers who booked me -->
-    <h1>My Appointments</h1>
+    <h1 class="text-light">My Appointments</h1>
     <% @bookings.sort.each do |booking| %>
     <% if booking.tutor == current_user.tutor %>
       <!-- Display only bookings that booked me, not everyone else's bookings -->
@@ -69,7 +69,6 @@
         <div class="btn btn-secondary btn-outline-dark btn-lg">
           <div class="d-flex justify-content-around align-items-center ">
             <h4><%= link_to_if !booking.cancelled?, "🔍", booking_path(booking), class: "btn btn-light" %></h4>
-            <h4><%= link_to_if !booking.cancelled?, "🖋", edit_tutor_booking_path(booking.tutor, booking.id), class: "btn btn-light" %></h4>
             <h4><%= link_to_if !booking.cancelled?, "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
           </div>
         </div>

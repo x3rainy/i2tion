@@ -3,13 +3,27 @@
   background-position: center;
   padding: 25vh 0;
   height: 30vh;
+  position: relative;
 
   h1 {
     margin: 0;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    font-size: 32px;
+    color: #ecff5ab3;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 70px;
     font-weight: bold;
+    position: absolute;
+    top: 55px;
+    left: 240px;
+  }
+
+  h2 {
+    margin: 0;
+    color: rgba(22, 218, 251, 0.79);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 32px;
+    position: absolute;
+    top: 140px;
+    left: 80px;
   }
 
   p {
@@ -17,5 +31,8 @@
     color: white;
     opacity: .7;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    position: absolute;
+    top: 185px;
+    left: 80px;
   }
 }
