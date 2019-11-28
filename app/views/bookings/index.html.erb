@@ -1,62 +1,80 @@
 <div class="container d-flex flex-column justify-content-center align-items-center p-3">
-  <h1>My Bookings</h1>
   <% if params[:tutor_id].nil? %>
-  <!-- Current User is looking at "MY APPOINTMENTS - A List of all customers who have booked me -->
-        <% @bookings.sort.each do |booking| %>
-        <% if booking.user == current_user %>
-        <!-- Display only bookings where I am the tutor -->
-         <div class="d-flex flex-column my-3">
-          <div class="card-product">
+    <h1>My Bookings</h1>
+  <!-- Current User is looking at "MY BOOKING" - A List of all tutors I have booked -->
+    <% @bookings.sort.each do |booking| %>
+      <% if booking.user == current_user %>
+      <!-- Display only bookings who I booked -->
+        <div class="d-flex flex-column my-3 <%= 'greyed' if booking.cancelled? %>">
+          <div class="card-product w-100">
             <%= cl_image_tag booking.tutor.photo, width: 300, height: 400, crop: :fill, gravity: :face %>
-            <div class="card-product-infos">
-            <h2>Booking with <%= booking.tutor.user.name %> </h2>
-            <p>Location: <%= booking.location %></p>
-            <p>Comments: <%= booking.comments %></p>
-            <p>Start: <%= booking.start_datetime %></p>
-            <p>End: <%= booking.end_datetime %></p>
+            <div class="card-product-infos pl-3">
+              <% if booking.cancelled %>
+                <div class="text-center">
+                  <h2 class="mb-2">This booking has been cancelled by <%= booking.canceller %></h2>
+                  <%= link_to "View Booking", booking_path(booking), class: "btn-sm btn-success text-decoration-none" %>
+                  <%= link_to "Remove Booking", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn-sm btn-danger text-decoration-none" %>
+                </div>
+              <% else %>
+                <h2>Booking with <%= booking.tutor.user.name %> </h2>
+                <p>Location: <%= booking.location %></p>
+                <p>Comments: <%= booking.comments %></p>
+                <p>Start: <%= booking.start_datetime %></p>
+                <p>End: <%= booking.end_datetime %></p>
+              <% end %>
             </div>
           </div>
           <div class="btn btn-secondary btn-outline-dark btn-lg">
             <div class="d-flex justify-content-around align-items-center">
-            <h4><%= link_to "🔍", booking_path(booking), class: "btn btn-light" %></h4>
-            <h4><%= link_to "🖋", edit_tutor_booking_path(booking.tutor, booking.id), class: "btn btn-light" %></h4>
-            <h4><%= link_to "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn btn-danger" %>
+              <h4><%= link_to_if !booking.cancelled?, "🔍", booking_path(booking), class: "btn btn-light " %></h4>
+              <h4><%= link_to_if !booking.cancelled?, "🖋", edit_tutor_booking_path(booking.tutor, booking.id), class: "btn btn-light" %></h4>
+              <h4><%= link_to_if !booking.cancelled?, "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
             </div>
           </div>
-        <% end %>
-        <% end %>
-
+        </div>
+      <% end %>
+    <% end %>
   <% else %>
-  <!-- Current User is looking at "My Bookings" - A List of all tutors I have booked -->
-              <% @bookings.sort.each do |booking| %>
-                    <% if booking.tutor == current_user.tutor %>
-                    <!-- Display only bookings that I booked, not everyone else's bookings -->
-                     <div class="d-flex flex-column my-3">
-                      <div class="card-product">
-
-                        <!-- if customer is a tutor AND has a photo, display customer's photo else display faceless photo -->
-                        <% if booking.user.tutor.nil? == false && booking.user.tutor.photo? %>
-                          <%= cl_image_tag booking.user.tutor.photo, width: 300, height: 400, crop: :fill, gravity: :face %>
-                        <% else %>
-                          <%= image_tag "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png", height: 300, width: 400 %>
-                        <% end %>
-
-                        <div class="card-product-infos">
-                        <h2>Booked by <%= booking.user.name %> </h2>
-                        <p>Location: <%= booking.location %></p>
-                        <p>Comments: <%= booking.comments %></p>
-                        <p>Start: <%= booking.start_datetime %></p>
-                        <p>End: <%= booking.end_datetime %></p>
-                        </div>
-                      </div>
-                      <div class="btn btn-secondary btn-outline-dark btn-lg">
-                        <div class="d-flex justify-content-around align-items-center ">
-                        <h4><%= link_to "🔍", booking_path(booking), class: "btn btn-light" %></h4>
-                        <h4><%= link_to "🖋", edit_tutor_booking_path(booking.tutor, booking.id), class: "btn btn-light" %></h4>
-                        <h4><%= link_to "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn btn-danger" %>
-                        </div>
-                      </div>
-                    <% end %>
-              <% end %>
+  <!-- Tutor is looking at "MY APPOINTMENTS" - A List of all customers who booked me -->
+    <h1>My Appointments</h1>
+    <% @bookings.sort.each do |booking| %>
+    <% if booking.tutor == current_user.tutor %>
+      <!-- Display only bookings that booked me, not everyone else's bookings -->
+      <div class="d-flex flex-column my-3 <%= 'greyed' if booking.cancelled? %>">
+        <div class="card-product w-100">
+          <!-- if customer is a tutor AND has a photo, display customer's photo else display faceless photo -->
+          <% if booking.user.tutor.nil? == false && booking.user.tutor.photo? %>
+            <%= cl_image_tag booking.user.tutor.photo, width: 300, height: 400, crop: :fill, gravity: :face %>
+          <% else %>
+            <%= image_tag "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png", height: 300, width: 400 %>
+          <% end %>
+          <div class="card-product-infos pl-3">
+            <% if booking.cancelled %>
+              <div class="text-center">
+                <% if booking.user == current_user %>
+                  <h2 class="mb-2">This booking has been cancelled by <%= booking.user.name %></h2>
+                <% else %>
+                  <h2 class="mb-2">This booking has been cancelled by <%= current_user.name %></h2>
+                <% end %>
+              </div>
+            <% else %>
+              <h2>Booked by <%= booking.user.name %> </h2>
+              <p>Location: <%= booking.location %></p>
+              <p>Comments: <%= booking.comments %></p>
+              <p>Start: <%= booking.start_datetime %></p>
+              <p>End: <%= booking.end_datetime %></p>
+            <% end %>
+          </div>
+        </div>
+        <div class="btn btn-secondary btn-outline-dark btn-lg">
+          <div class="d-flex justify-content-around align-items-center ">
+            <h4><%= link_to_if !booking.cancelled?, "🔍", booking_path(booking), class: "btn btn-light" %></h4>
+            <h4><%= link_to_if !booking.cancelled?, "🖋", edit_tutor_booking_path(booking.tutor, booking.id), class: "btn btn-light" %></h4>
+            <h4><%= link_to_if !booking.cancelled?, "🔥", tutor_booking_path(booking.tutor, booking.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
   <% end %>
 </div>

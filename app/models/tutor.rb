@@ -14,4 +14,5 @@ class Tutor < ApplicationRecord
   validates :bio, presence: true
   validates :activity_status, presence: true
   validates :user, presence: true, uniqueness: true
+  validates :photo, presence: true
 end
