@@ -77,10 +77,10 @@ tutors = allusers.slice(0..4)
   a.save
 }
 
-puts "seeding 80 reviews..."
+puts "seeding 50 reviews..."
 allbookings = Booking.all.sort
 r = 0
-80.times{
+50.times{
   a = Review.new(booking: allbookings[r], content: "Meh it was fine but i've seen better tutors!", stars: rand(0..5))
   a.save
   r += 1
