@@ -2,21 +2,24 @@ class BookingsController < ApplicationController
   def index
     if params[:tutor_id].nil?
       @user = User.find(params[:user_id])
-      @bookings = policy_scope(Booking.geocoded)
+      @bookings = policy_scope(Booking)
       @bookings = @bookings.where(user: @user)
       authorize Booking.new(user: @user)
     else
       @tutor = Tutor.find(params[:tutor_id])
-      @bookings = policy_scope(Booking.geocoded)
+      @bookings = policy_scope(Booking)
       @bookings = @bookings.where(tutor: @tutor)
       authorize Booking.new(tutor: @tutor)
     end
 
     @markers = @bookings.map do |booking|
-      {
-        lat: booking.latitude,
-        lng: booking.longitude
-      }
+      if booking.geocode.nil?
+      else
+        {
+          lat: booking.latitude,
+          lng: booking.longitude
+        }
+      end
     end
   end
 
