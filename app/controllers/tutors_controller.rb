@@ -2,7 +2,11 @@ class TutorsController < ApplicationController
   before_action :set_tutor, only: %i[show edit update destroy]
 
   def index
-    @tutors = policy_scope(Tutor)
+    if params[:query].present?
+      @tutors = policy_scope(Tutor.global_search(params[:query]))
+    else
+      @tutors = policy_scope(Tutor)
+    end
   end
 
   def show
