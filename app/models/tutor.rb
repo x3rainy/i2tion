@@ -1,4 +1,16 @@
 class Tutor < ApplicationRecord
+  include PgSearch::Model
+
+  pg_search_scope :global_search,
+    against: [:gender],
+    associated_against: {
+      user: [:name],
+      specialisations: [:name]
+    },
+    using: {
+      tsearch: { prefix: true }
+    }
+
   mount_uploader :photo, PhotoUploader
 
   belongs_to :user
