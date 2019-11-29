@@ -18,6 +18,8 @@ class BookingsController < ApplicationController
         {
           lat: booking.latitude,
           lng: booking.longitude
+          infoWindow: render_to_string(partial: "info_window", locals: { booking: booking }),
+          image_url: helpers.asset_url('map1.png')
         }
       end
     end
