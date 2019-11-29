@@ -16,7 +16,7 @@
                 <div class="text-center">
                   <h2 class="mb-2">This booking has been cancelled by <%= booking.canceller %></h2>
                   <%= link_to "View Booking", booking_path(booking), class: "btn-sm btn-success text-decoration-none" %>
-                  <%= link_to "Remove Booking", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn-sm btn-danger text-decoration-none" %>
+                  <% link_to "Remove Booking", tutor_booking_path(booking.tutor, booking.id), method: :delete, class: "btn-sm btn-danger text-decoration-none" %>
                 </div>
               <% else %>
                 <h2>Booking with <%= booking.tutor.user.name %> </h2>

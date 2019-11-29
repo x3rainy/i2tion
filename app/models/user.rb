@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bookings
-  has_many :reviews, through: :bookings
+  has_many :reviews
   has_many :tutors, through: :bookings
   has_one :tutor
 
