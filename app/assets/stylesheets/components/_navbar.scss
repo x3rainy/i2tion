@@ -1,11 +1,12 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: #F8F8F8;
+  background: transparent;
   font-family: 'Righteous', cursive;
-}
+  transition: 0.5s background-color ease;
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+  .navbar-collapse {
+    flex-grow: 0;
+  }
 }
 
 .navbar-lewagon .navbar-brand img {
@@ -17,11 +18,29 @@
   }
 }
 
+.navbar-lewagon-white {
+  background-color: white;
+}
+
 #navbarDropdown:hover {
   cursor: pointer;
   box-shadow: inset 0 0 5px rgba(0,0,0,.075), 0 0 8px rgba(253, 236, 110, 0.6);
 }
 
-#logo {
-  margin-right: auto;
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+  color: white;
+
+  &:hover {
+    color: #ecff5ab3;
+    box-shadow: inset 0 0 5px rgba(0,0,0,.075), 0 0 8px rgba(253, 236, 110, 0.6);
+  }
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+
+  &:hover {
+    color: rgba(22, 218, 251, 0.79);
+    box-shadow: inset 0 0 5px rgba(0,0,0,.075), 0 0 8px rgba(253, 236, 110, 0.6);
+  }
 }

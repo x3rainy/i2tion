@@ -8,4 +8,8 @@ class Booking < ApplicationRecord
 
   validates :start_datetime, presence: true
   validates :end_datetime, presence: true
+
+  def cancelled?
+    return cancelled
+  end
 end

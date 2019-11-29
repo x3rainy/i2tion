@@ -2,21 +2,20 @@ class TutorsController < ApplicationController
   before_action :set_tutor, only: %i[show edit update destroy]
 
   def index
-    @tutors = Tutor.all
+    @tutors = policy_scope(Tutor)
   end
 
   def show
+    authorize Tutor.new
   end
 
   def new
+    authorize Tutor.new
     @tutor = Tutor.new
   end
 
   def create
-    if Tutor.exists?(user_id: current_user.id)
-      flash[:alert] = "You already have a tutor profile!"
-      redirect_to tutors_path
-    end
+    authorize Tutor.new
     tutor = Tutor.new(tutor_params)
     tutor.user = current_user
     spec_array = params['tutor']['specialisation_ids']
@@ -35,13 +34,16 @@ class TutorsController < ApplicationController
   end
 
   def edit
+    authorize @tutor
   end
 
   def update
+    authorize @tutor
     if @tutor.update(tutor_params)
       spec_array = params['tutor']['specialisation_ids']
       if spec_array.empty? == false
         spec_array.delete_at(0)
+        @tutor.specialisations.destroy_all
         spec_array.each { |id| @tutor.specialisations << Specialisation.find(id) }
       end
       @tutor.save
@@ -55,6 +57,7 @@ class TutorsController < ApplicationController
   end
 
   def destroy
+    authorize @tutor
     @tutor.destroy
     redirect_to user_path(current_user)
   end

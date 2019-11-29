@@ -1,3 +1,8 @@
+.card {
+  box-shadow: 0 0 15px rgba(0,0,0,.2);
+  background: #F8F8F8;
+}
+
 .card-product {
   overflow: hidden;
   height: 120px;
@@ -10,6 +15,14 @@
 
   &:hover {
     box-shadow: inset 0 0 30px rgba(0,0,0,.075), 0 0 60px rgba(253, 236, 110, 0.6);
+  }
+}
+
+.greyed {
+  opacity: 75%;
+
+  a {
+    color: black;
   }
 }
 
@@ -34,6 +47,22 @@
 }
 
 .card-product .card-product-infos {
-  padding: 16px;
+  padding: 8px 0 8px 8px;
   width: 500px;
+}
+
+.card-body {
+  position: relative;
+
+  .booking-avatar {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+  }
+
+  .booking-view-tutor {
+    position: absolute;
+    top: 210px;
+    right: 50px;
+  }
 }

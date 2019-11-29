@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_075138) do
+ActiveRecord::Schema.define(version: 2019_11_28_075707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2019_11_28_075138) do
     t.bigint "review_id"
     t.float "latitude"
     t.float "longitude"
+    t.boolean "cancelled", default: false
+    t.string "canceller"
     t.index ["review_id"], name: "index_bookings_on_review_id"
     t.index ["tutor_id"], name: "index_bookings_on_tutor_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"

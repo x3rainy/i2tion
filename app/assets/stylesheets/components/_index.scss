@@ -5,6 +5,7 @@
 @import "card";
 @import "container";
 @import "form";
+@import "banner";
 
 body {
   background-image: linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1)), url("https://wallpaperplay.com/walls/full/c/e/d/326924.jpg");
@@ -12,7 +13,6 @@ body {
   font-family: 'Calistoga', cursive;
 }
 
-h1 {
+h1, h2 {
   font-family: 'Righteous', cursive;
-  color: #F8F8F8;
 }
