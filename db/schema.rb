@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 2019_11_28_075707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "review_id"
-    t.float "latitude"
-    t.float "longitude"
     t.boolean "cancelled", default: false
     t.string "canceller"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["review_id"], name: "index_bookings_on_review_id"
     t.index ["tutor_id"], name: "index_bookings_on_tutor_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
