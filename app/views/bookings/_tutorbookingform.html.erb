@@ -1,9 +1,9 @@
 <div class="m-5">
   <%= simple_form_for [@tutor, @booking] do |f| -%>
-    <%= f.input :location %>
-    <%= f.input :comments %>
     <%= f.input :start_datetime %>
     <%= f.input :end_datetime %>
+    <%= f.input :comments %>
+    <%= f.input :location %>
     <%= f.button :submit, class: "btn btn-primary" %>
   <% end -%>
 </div>
