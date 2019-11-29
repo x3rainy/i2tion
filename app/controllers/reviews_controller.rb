@@ -9,6 +9,8 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @booking = Booking.find(params[:booking_id])
     @review.booking = @booking
+    @review.user = @booking.user
+    @review.tutor = @booking.tutor
     authorize @review
     if @review.save
       flash[:notice] = "Review Created!"

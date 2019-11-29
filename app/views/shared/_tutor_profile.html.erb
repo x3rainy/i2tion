@@ -36,4 +36,20 @@
       <p class="m-0"><%= specialisation['name'] %></p>
     <% end %>
   </div>
+
+  <div class="specialization-container alert-info m-3 p-3">
+    <div class="border-bottom mb-2 d-flex justify-content-between">
+      <% total_stars = 0 %>
+      <% tutor.reviews.each do |review| %>
+      <% total_stars += review.stars %>
+      <% end %>
+      <% avg_stars = total_stars.to_f / tutor.reviews.length %>
+      <h5>Reviews about this tutor</h5>
+      <h5 > <%= avg_stars.floor(1) if !tutor.reviews.blank? %>🌟</h5>
+    </div>
+
+      <% tutor.reviews.each do |review| %>
+      <p class="m-0">"<%= review.content %>"<br><i> - by <%= review.user.name %></i><br>-------------</p>
+    <% end %>
+  </div>
 </div>

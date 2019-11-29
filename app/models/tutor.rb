@@ -6,7 +6,7 @@ class Tutor < ApplicationRecord
   has_many :tutor_specialisations, dependent: :destroy
   has_many :specialisations, through: :tutor_specialisations
   has_many :bookings, dependent: :destroy
-  has_many :reviews, through: :bookings, dependent: :destroy
+  has_many :reviews
   has_many :users, through: :bookings
 
   validates :age, presence: true, inclusion: { in: 12..90 }

@@ -30,11 +30,12 @@
           <p><strong>Content:</strong> <%= @booking.review.content %></p>
           <p><strong>Stars:</strong> <%= @booking.review.stars %></p>
           <%= link_to_if !@booking.cancelled?, "🖋", edit_booking_review_path(@booking, @booking.review), class: "btn btn-outline-dark" %>
-          <% if policy(Review).destroy? %>
-            <%= link_to "🔥", booking_review_path(@booking, @booking.review), method: :delete, class: "btn btn-danger" %>
+          <% if @booking.review.user == current_user %>
+            <% link_to "🔥", booking_review_path(@booking, @booking.review), method: :delete, class: "btn btn-danger" %>
           <% end %>
         <% else %>
           <p class="text-center">No reviews for this booking yet!</p>
+          <%= link_to "Review this booking", new_booking_review_path(@booking), class: "btn btn-primary"  %>
         <% end %>
     </div>
   </div>
