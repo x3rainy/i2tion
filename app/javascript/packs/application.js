@@ -1,3 +1,6 @@
+import { initStarRating } from '../plugins/init_star_rating';
+
+import "../plugins/flatpickr";
 
 import "bootstrap";
 
@@ -9,4 +12,4 @@ import { initUpdateNavbarOnScroll } from '../components/navbar';
 
 initMapbox();
 initUpdateNavbarOnScroll();
-
+initStarRating();
