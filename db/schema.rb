@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 2019_11_29_071159) do
     t.datetime "updated_at", null: false
     t.bigint "review_id"
     t.boolean "cancelled", default: false
-    t.string "canceller"
     t.float "latitude"
     t.float "longitude"
+    t.string "canceller"
     t.index ["review_id"], name: "index_bookings_on_review_id"
     t.index ["tutor_id"], name: "index_bookings_on_tutor_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
@@ -37,11 +37,11 @@ ActiveRecord::Schema.define(version: 2019_11_29_071159) do
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.integer "stars"
+    t.bigint "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "tutor_id"
     t.bigint "user_id"
-    t.bigint "booking_id"
     t.index ["booking_id"], name: "index_reviews_on_booking_id"
     t.index ["tutor_id"], name: "index_reviews_on_tutor_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"

@@ -1,7 +1,7 @@
 <div class="m-5">
   <%= simple_form_for [@tutor, @booking] do |f| -%>
-    <%= f.input :start_datetime %>
-    <%= f.input :end_datetime %>
+    <%= f.input :start_datetime, as: :string, required: false, input_html: {class: "datepicker"} %>
+    <%= f.input :end_datetime, as: :string, required: false, input_html: {class: "datepicker"} %>
     <%= f.input :comments %>
     <%= f.input :location %>
     <%= f.button :submit, class: "btn btn-primary" %>
